@@ -11,7 +11,7 @@
 <body data-ng-controller="MirrorCtrl as commands">
   <div class="top">
     <div class="top-left">
-      <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
+      <div class="date grey">{{date | date : 'EEEE, MMMM DD YYYY'}}</div>
       <div class="time">{{date | date : 'hh:mm a'}}</div>
     </div> 
     <div class="top-right">
@@ -34,7 +34,6 @@
     <div class="middle-center">
       <h1>{{complement}}</h1>
       <h3 data-ng-show="!(user.name === undefined)">{{user.name}}</h3>
-      <!-- <div class="listening" data-ng-show="listening">Ready: {{focus}}</div> -->
       <div class="contents-box map animate-grow" data-ng-show="focus == 'map'">
         <img class="map animate-grow" data-ng-src="{{map}}"/>
       </div>
@@ -76,7 +75,7 @@
       <hr/>
       <ul class="list-group">
         <li class="list-group-item" data-ng-repeat="result in commands.results">
-          <span class="badge">{{ result.date | date : 'EEE MMM, yyyy hh:mm:ss a' }}</span>
+          <span class="badge">{{ result.date | date : 'EEE MMM, YYYY hh:mm:ss a' }}</span>
           {{ result.content }}
         </li>
       </ul>
