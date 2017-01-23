@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="SmartMirror">
+<html ng-app="SmartMirror">
 <head>
   <meta charset="utf-8">
   <title>Smart Mirror</title>
@@ -8,19 +8,19 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/main.css" />
 </head>
-<body data-ng-controller="MirrorCtrl as commands">
+<body ng-controller="MirrorCtrl as commands">
   <div class="top">
     <div class="top-left">
-      <div class="date grey">{{date | date : 'EEEE, MMMM DD YYYY'}}</div>
+      <div class="date grey">{{date | date : 'EEEE, MMMM d YYYY'}}</div>
       <div class="time">{{date | date : 'hh:mm a'}}</div>
-    </div> 
+    </div>
     <div class="top-right">
       <div class="weather">
         <div class="weather-today">
           <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
         </div>
         <div class="weather-week-descriptor">{{weeklyForcast.summary}}</div>
-        <div class="weather-week" data-ng-repeat="forcast in weeklyForcast.data" data-ng-if="$index > 0">
+        <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
           <div class="weather-week-day">
             <span class="day light-grey">{{forcast.day}}</span>
             <span class="tempreture tempreture-min">{{forcast.temperatureMin}}</span>
@@ -33,25 +33,17 @@
   <div class="container">
     <div class="middle-center">
       <h1>{{complement}}</h1>
-      <h3 data-ng-show="!(user.name === undefined)">{{user.name}}</h3>
-      <div class="contents-box map animate-grow" data-ng-show="focus == 'map'">
-        <img class="map animate-grow" data-ng-src="{{map}}"/>
-      </div>
+      <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
     </div>
     <div class="bottom-center">
       <!-- Command list -->
-      <div class="commands animate-grow" data-ng-show="focus == 'commands'">
+      <div class="commands animate-grow" ng-show="focus == 'commands'">
         <h2>사용 가능한 질문</h2>
         <dl>
           <dt>사용 가능한 질문</dt>
           <dd>사용 가능한 질문을 보여줍니다.</dd>
           <dt>집</dt>
           <dd>홈 스크린으로 돌아갑니다.</dd>
-          <!-- 추가해야하는 질문 -->
-          <dt>옷 리스트 보여줘</dt>
-          <dd>옷리스트를 보여줍니다.</dd>
-          <dt>**번째 옷 보여줘</dt>
-          <dd>**번째 옷을 보여줍니다.</dd>
         </dl>
         <small>
           We are using node <script>document.write(process.versions.node)</script>,
@@ -59,22 +51,20 @@
           and Electron <script>document.write(process.versions.electron)</script>.
         </small>
       </div>
-      <div class="interim-result" data-ng-bind="interimResult"></div>
-    </div>
-    <div class="colors animate-grow" data-ng-show="focus == 'colors'">
-      <div class="color-block" data-ng-repeat="color in colors" style="background-color:{{color}}"></div>
+      <div class="interim-result" ng-bind="interimResult"></div>
     </div>
   </div>
-  <div class="debug-info" data-ng-show="debug == true">
-    <button data-ng-click="focus = (focus == 'colors')?'default':'colors'">Colors</button>
-    <button data-ng-click="focus = (focus == 'commands')?'default':'commands'">Commands</button>
-    <button data-ng-click="debug = false">Close Debug</button>
+  <!-- Debug Buttons -->
+  <div class="debug-info">
+    <!--<button ng-click="debug = true">Open Debug</button>-->
+  </div>
+  <div class="debug-info" ng-show="debug == true">
     <!-- Has results -->
-    <div data-ng-show="commands.results.length > 0">
-      <button class="btn btn-default" data-ng-click="commands.clearResults()">Clear</button>
+    <div ng-show="commands.results.length > 0">
+      <button class="btn btn-default" ng-click="commands.clearResults()">Clear</button>
       <hr/>
       <ul class="list-group">
-        <li class="list-group-item" data-ng-repeat="result in commands.results">
+        <li class="list-group-item" ng-repeat="result in commands.results">
           <span class="badge">{{ result.date | date : 'EEE MMM, YYYY hh:mm:ss a' }}</span>
           {{ result.content }}
         </li>
@@ -82,13 +72,14 @@
     </div>
   </div>
   <!-- Sleep cover -->
-  <div data-ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
+  <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
   <!-- Libraries -->
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-animate/angular-animate.min.js"></script>
   <script src="bower_components/moment/min/moment.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/xml2json/xml2json.js"></script>
+
   <!-- App -->
   <script src="js/annyang.js"></script>
   <script src="config.js"></script>

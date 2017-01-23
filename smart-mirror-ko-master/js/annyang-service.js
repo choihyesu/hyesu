@@ -30,7 +30,6 @@
         service.setLanguage("ko");
 
         service.start = function(listening, interimResult, result) {
-        	console.log("annyang start");
             annyang.addCommands(service.commands);
             annyang.debug(true);
             annyang.start();

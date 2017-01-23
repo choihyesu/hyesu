@@ -45,6 +45,14 @@
         });
       })
 
+      // Hue communication
+      HueService.init();
+
+      var defaultView = function() {
+        console.debug("Ok, going to default view...");
+        $scope.focus = "default";
+      }
+
       // List commands
       AnnyangService.addCommand(command.whatcanisay, function() {
         console.debug("Here is a list of commands...");
